@@ -79,5 +79,16 @@ final class SurvosSettingsBundle extends AbstractSurvosBundle
             ->tag('twig.extension');
         $services->set(SettingsForm::class)
             ->arg('$definitions', $config['settings']);
+
+        // SurvosTabler is optional, and there's nothing to link to when the host app
+        // hasn't configured any settings — only wire the "Settings" user-menu item
+        // when both are true. SettingsController itself is always registered (via
+        // kit-bundle's src/Controller/ auto-scan) since an empty settings page is
+        // harmless; this only gates whether anything points at it.
+        if ($config['settings'] !== [] && class_exists(\Survos\TablerBundle\Event\MenuEvent::class)) {
+            $services->set(\Survos\SettingsBundle\Menu\SettingsMenuSubscriber::class)
+                ->autowire()
+                ->autoconfigure();
+        }
     }
 }
