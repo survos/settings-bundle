@@ -35,7 +35,7 @@ final class SurvosSettingsBundle extends AbstractSurvosBundle
                     ->defaultValue('global')
                 ->end()
                 ->booleanNode('fallback_to_global')
-                    ->info('When true, scoped reads fall back to the global scope before returning the caller default.')
+                    ->info('When true, scoped reads fall back to the global scope before returning the declared default (or, for an undeclared setting, the caller default).')
                     ->defaultTrue()
                 ->end()
                 ->arrayNode('settings')
@@ -72,7 +72,8 @@ final class SurvosSettingsBundle extends AbstractSurvosBundle
 
         $services->set(SettingsManager::class)
             ->arg('$globalScope', $config['global_scope'])
-            ->arg('$fallbackToGlobal', $config['fallback_to_global']);
+            ->arg('$fallbackToGlobal', $config['fallback_to_global'])
+            ->arg('$definitions', $config['settings']);
         $services->alias(SettingsManagerInterface::class, SettingsManager::class);
 
         $services->set(SettingsExtension::class)

@@ -16,6 +16,8 @@ final readonly class SettingsManager implements SettingsManagerInterface
         private ScopeResolverInterface $scopeResolver,
         private string $globalScope = 'global',
         private bool $fallbackToGlobal = true,
+        /** @var array<string, array{default?: mixed}> the app's declared settings (survos_settings.settings) */
+        private array $definitions = [],
     ) {}
 
     public function get(string $name, mixed $default = null, ?string $scope = null): mixed
@@ -32,7 +34,10 @@ final readonly class SettingsManager implements SettingsManagerInterface
             }
         }
 
-        return $default;
+        // A default the app declared for this setting (survos_settings.settings.<name>.default) is what it means
+        // by 'unset'. The caller's default is only for settings nobody declared (or declared without a default),
+        // so a bundle that hard-codes `true` at its call site cannot override the app's own `default: false`.
+        return $this->definitions[$name]['default'] ?? $default;
     }
 
     public function set(string $name, mixed $value, ?string $scope = null, bool $flush = true): void
