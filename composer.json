@@ -24,7 +24,7 @@
         "php": "^8.4",
         "doctrine/dbal": "^4.2",
         "doctrine/doctrine-bundle": "^3.2",
-        "doctrine/orm": "^3.6",
+        "doctrine/orm": "^3.7",
         "survos/kit-bundle": "^2.5",
         "symfony/dependency-injection": "^8.1",
         "symfony/form": "^8.1",
