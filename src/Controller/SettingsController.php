@@ -24,7 +24,9 @@ use Twig\Environment;
  */
 final class SettingsController
 {
-    public function __construct(private readonly Environment $twig) {}
+    public function __construct(private readonly Environment $twig)
+    {
+    }
 
     #[Route('/settings', name: 'survos_settings_index', methods: ['GET'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]

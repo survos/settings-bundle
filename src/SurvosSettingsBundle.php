@@ -13,8 +13,8 @@ use Survos\SettingsBundle\Service\NullScopeResolver;
 use Survos\SettingsBundle\Service\ScopeResolverInterface;
 use Survos\SettingsBundle\Service\SettingsManager;
 use Survos\SettingsBundle\Service\SettingsManagerInterface;
-use Survos\SettingsBundle\Twig\SettingsExtension;
 use Survos\SettingsBundle\Twig\Components\SettingsForm;
+use Survos\SettingsBundle\Twig\SettingsExtension;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Kernel\RequiredBundle;
@@ -86,8 +86,8 @@ final class SurvosSettingsBundle extends AbstractSurvosBundle
         // when both are true. SettingsController itself is always registered (via
         // kit-bundle's src/Controller/ auto-scan) since an empty settings page is
         // harmless; this only gates whether anything points at it.
-        if ($config['settings'] !== [] && class_exists(\Survos\TablerBundle\Event\MenuEvent::class)) {
-            $services->set(\Survos\SettingsBundle\Menu\SettingsMenuSubscriber::class)
+        if ([] !== $config['settings'] && class_exists(\Survos\TablerBundle\Event\MenuEvent::class)) {
+            $services->set(Menu\SettingsMenuSubscriber::class)
                 ->autowire()
                 ->autoconfigure();
         }

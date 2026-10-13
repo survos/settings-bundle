@@ -12,12 +12,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class SettingsFormType extends AbstractType
 {
     /** @param array<string, array{type?: class-string, options?: array<string, mixed>, default?: mixed}> $definitions */
-    public function __construct(private readonly array $definitions = []) {}
+    public function __construct(private readonly array $definitions = [])
+    {
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $names = $options['settings'];
-        if ($names === []) {
+        if ([] === $names) {
             $names = array_keys($this->definitions);
         }
 

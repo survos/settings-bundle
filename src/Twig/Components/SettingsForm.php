@@ -36,7 +36,8 @@ final class SettingsForm
         private readonly FormFactoryInterface $formFactory,
         private readonly SettingsManagerInterface $settingsManager,
         private readonly array $definitions = [],
-    ) {}
+    ) {
+    }
 
     #[LiveAction]
     public function save(): void

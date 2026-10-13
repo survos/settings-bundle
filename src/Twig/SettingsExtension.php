@@ -10,7 +10,9 @@ use Twig\TwigFunction;
 
 final class SettingsExtension extends AbstractExtension
 {
-    public function __construct(private readonly SettingsManagerInterface $settings) {}
+    public function __construct(private readonly SettingsManagerInterface $settings)
+    {
+    }
 
     public function getFunctions(): array
     {

@@ -18,7 +18,8 @@ final readonly class SettingsManager implements SettingsManagerInterface
         private bool $fallbackToGlobal = true,
         /** @var array<string, array{default?: mixed}> the app's declared settings (survos_settings.settings) */
         private array $definitions = [],
-    ) {}
+    ) {
+    }
 
     public function get(string $name, mixed $default = null, ?string $scope = null): mixed
     {

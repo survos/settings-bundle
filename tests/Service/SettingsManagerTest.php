@@ -58,7 +58,9 @@ final class SettingsManagerTest extends TestCase
 
 final class FixedScopeResolver implements ScopeResolverInterface
 {
-    public function __construct(private readonly ?string $scope) {}
+    public function __construct(private readonly ?string $scope)
+    {
+    }
 
     public function currentScope(): ?string
     {
@@ -70,7 +72,9 @@ final class FixedScopeResolver implements ScopeResolverInterface
 final class InMemorySettingRepository extends SettingRepository
 {
     /** @param list<Setting> $settings */
-    public function __construct(private array $settings) {}
+    public function __construct(private array $settings)
+    {
+    }
 
     public function findOneForScope(?string $scope, string $name): ?Setting
     {
