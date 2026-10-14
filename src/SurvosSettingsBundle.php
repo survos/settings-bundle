@@ -86,7 +86,7 @@ final class SurvosSettingsBundle extends AbstractSurvosBundle
         // when both are true. SettingsController itself is always registered (via
         // kit-bundle's src/Controller/ auto-scan) since an empty settings page is
         // harmless; this only gates whether anything points at it.
-        if ([] !== $config['settings'] && class_exists(\Survos\TablerBundle\Event\MenuEvent::class)) {
+        if ([] !== $config['settings'] && trait_exists(\Survos\TablerBundle\Menu\MenuBuilderTrait::class)) {
             $services->set(Menu\SettingsMenuSubscriber::class)
                 ->autowire()
                 ->autoconfigure();

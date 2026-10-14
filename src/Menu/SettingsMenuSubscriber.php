@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Survos\SettingsBundle\Menu;
 
-use Survos\TablerBundle\Event\MenuEvent;
+use Survos\MenuBundle\Attribute\AsMenuListener;
+use Survos\MenuBundle\Event\MenuEvent;
+use Survos\MenuBundle\MenuSlot;
 use Survos\TablerBundle\Menu\MenuBuilderTrait;
 use Survos\TablerBundle\Service\IconService;
 use Survos\TablerBundle\Service\RouteAliasService;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -32,7 +33,7 @@ final class SettingsMenuSubscriber
     ) {
     }
 
-    #[AsEventListener(event: MenuEvent::AUTH)]
+    #[AsMenuListener(MenuSlot::AUTH)]
     public function onAuthMenu(MenuEvent $event): void
     {
         $this->add($event->getMenu(), 'survos_settings_index', label: 'Settings', icon: 'tabler:settings');
